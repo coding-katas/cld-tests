@@ -1,0 +1,10 @@
+
+
+curl -X POST \
+  http://localhost:8080/cliper \
+  -H 'Content-Type: application/json' \
+  -d '{ "entityId": "b-3", "params": [ { "key": "application_name", "value": "tcrm" } ] }'
+
+curl -X GET http://localhost:8080/cliper
+
+curl -X GET http://localhost:8082/cliper_report

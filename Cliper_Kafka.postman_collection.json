@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "f9939bfd-bd31-4038-8bc9-764ba22bcf36",
+		"name": "Cliper Kafka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"param": [
+		{
+			"name": "Create cliper",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"entityId\": \"b-3\",\n    \"params\": [\n        {\n            \"key\": \"application_name\",\n           \"value\": \"tcrm\"\n        }\n    ]\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cliper",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliper"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Clipers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cliper",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliper"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/cliper_report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"cliper_report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get report Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/cliper_report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"cliper_report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

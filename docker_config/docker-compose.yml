@@ -1,0 +1,65 @@
+version: "3"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.2.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+     
+    
+  kafka:
+
+    image: confluentinc/cp-kafka:6.2.0
+    container_name: instance-1
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+      - 9093:9093
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://instance-1:9092,SSL://instance-1:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1      
+      KAFKA_SSL_CLIENT_AUTH: "required"
+      KAFKA_SSL_KEYSTORE_FILENAME: '/certs/keystore.jks'
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: '/certs/kafka_keystore_credentials'
+      KAFKA_SSL_KEY_CREDENTIALS: '/certs/kafka_sslkey_credentials'
+      KAFKA_SSL_TRUSTSTORE_FILENAME: '/certs/truststore.jks'
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: '/certs/kafka_truststore_credentials'
+    volumes:
+      - ../certs/:/etc/kafka/secrets/certs
+#    command: >
+#      sh -c "kafka-topics --bootstrap-server instance-1:9093 --create --topic CLIPER_TOPIC --command-config /etc/kafka/secrets/certs/client-ssl-container.properties"
+
+  
+  cliper-producer:
+    image: cliper-producer
+    container_name: cliper-producer
+    ports:
+      - 8080:8080
+    volumes:
+      - ../certs/:/data/certs
+    depends_on:
+      - kafka
+  cliper-dedup:
+    image: cliper-dedup
+    container_name: cliper-dedup
+    ports:
+      - 8081:8081
+    volumes:
+      - ../certs/:/data/certs
+    depends_on:
+      - kafka
+#  cliper-report:
+#    image: cliper-report
+#    container_name: cliper-report
+#    ports:
+#      - 8082:8082
+#    volumes:
+#     - ../certs/:/data/certs
+#    depends_on:
+#      - kafka
