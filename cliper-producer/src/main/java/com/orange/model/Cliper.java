@@ -3,7 +3,7 @@ package com.orange.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.orange.dto.CliperDTO;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@Entity(name = "cliper")
+@Entity
 public class Cliper {
 
     @Id

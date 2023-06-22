@@ -3,7 +3,7 @@ package com.orange.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.orange.dto.ControlParameterDTO;
 
@@ -15,8 +15,9 @@ public class ControlParameter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "key")
+    @Column(name = "param_key")
     private String key;
+    @Column(name = "param_value")
     private String value;
     @ManyToOne
     @JoinColumn(name = "cliper_id")
